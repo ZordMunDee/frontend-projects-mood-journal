@@ -1,5 +1,7 @@
-import Image from "next/image";
+import MoodJournal from "@/components/mood-journal/MoodJournal";
 
-export default function Home() {
-  return;
-}
+const MoodJournalPage = () => {
+  return <MoodJournal />;
+};
+
+export default MoodJournalPage;
