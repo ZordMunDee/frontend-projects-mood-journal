@@ -12,6 +12,7 @@ import FiltersBar from "./FiltersBar";
 import TrendChart from "./TrendChart";
 import EntriesList from "./EntriesList";
 import Heatmap from "@/components/mood-journal/Heatmap";
+import { buildShareURL } from "@/lib/share";
 
 import type { Entry, MoodKey } from "./types";
 import { MOODS } from "./types";
@@ -242,14 +243,31 @@ export default function MoodJournal() {
           {/* Filters + Chart */}
           <Card className="rounded-2xl shadow-sm">
             <CardContent className="p-4 md:p-6 space-y-4">
-              <FiltersBar
-                rangeStart={rangeStart}
-                rangeEnd={rangeEnd}
-                filterMood={filterMood}
-                onChangeStart={setRangeStart}
-                onChangeEnd={setRangeEnd}
-                onChangeMood={setFilterMood}
-              />
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                {/* Filters */}
+                <FiltersBar
+                  rangeStart={rangeStart}
+                  rangeEnd={rangeEnd}
+                  filterMood={filterMood}
+                  onChangeStart={setRangeStart}
+                  onChangeEnd={setRangeEnd}
+                  onChangeMood={setFilterMood}
+                />
+
+                {/* Share button */}
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    const url = buildShareURL(rangeStart, rangeEnd, filterMood);
+                    navigator.clipboard.writeText(url);
+                    alert("📋 ลิงก์คัดลอกแล้ว!");
+                  }}
+                >
+                  Share
+                </Button>
+              </div>
+
+              {/* Chart */}
               <TrendChart data={chartData} />
             </CardContent>
           </Card>
