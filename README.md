@@ -34,7 +34,7 @@
 
 ```bash
 # 1. โคลน repo (ถ้ายังไม่มี)
-git clone <your-repo-url>
+git clone https://github.com/ZordMunDee/frontend-projects-mood-journal
 cd mood-journal
 
 # 2. ติดตั้ง dependencies
