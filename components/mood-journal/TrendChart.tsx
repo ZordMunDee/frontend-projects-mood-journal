@@ -9,17 +9,16 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export default function TrendChart({
-  data,
-}: {
-  data: Array<{ date: string; score: number | null }>;
-}) {
+type DataPoint = { date: string; score: number | null };
+type TrendChartProps = { data: DataPoint[] };
+
+export default function TrendChart({ data }: TrendChartProps) {
   const hasData = data.some((d) => d.score !== null);
 
   return (
     <div className="h-64 md:h-72">
       {!hasData && (
-        <div className="text-center text-sm text-muted-foreground mb-2">
+        <div className="mb-2 text-center text-sm text-muted-foreground">
           ยังไม่มีข้อมูลในช่วงนี้ •
           ลองบันทึกอารมณ์ทางซ้ายแล้วกลับมาดูกราฟอีกครั้ง
         </div>
@@ -37,7 +36,15 @@ export default function TrendChart({
             axisLine={false}
             tickLine={false}
           />
-          <Tooltip formatter={(v: any) => (v == null ? "ไม่มีข้อมูล" : v)} />
+
+          {/* ✅ พิมพ์ type ให้ formatter ชัดเจน แทนการใช้ any */}
+          <Tooltip
+            formatter={(value: unknown) =>
+              value == null ? "ไม่มีข้อมูล" : (value as number)
+            }
+            labelFormatter={(label: unknown) => String(label)}
+          />
+
           <Line
             type="monotone"
             dataKey="score"
