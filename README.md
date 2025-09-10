@@ -1,72 +1,48 @@
-# Frontend Portfolio Projects
+# 🌙 Mood Journal
 
-This repository collects small but complete **frontend projects** I built with **Next.js, React, and TailwindCSS**.  
-Each project is self-contained and demonstrates different aspects of frontend development.
-
----
-
-## 📌 Projects
-
-### 1. Mood Journal
-
-Track your mood daily with notes and visualize your emotional trends.
-
-- Save entries in **localStorage** (no backend required)
-- Filter by mood and date range
-- View trends on a **line chart** (Recharts)
-- Import/Export CSV
-
-👉 Folder: [`/mood-journal`](./mood-journal)  
-👉 Demo: _(Deploy on Vercel link here)_
+เว็บแอปพลิเคชันสำหรับบันทึกอารมณ์ประจำวัน พร้อมแสดงผลเป็นกราฟสรุป  
+สร้างขึ้นด้วย **Next.js (App Router)** + **shadcn/ui** + **Tailwind CSS** + **Recharts**
 
 ---
 
-### 2. Color Palette Generator
+## ✨ ฟีเจอร์หลัก
 
-Generate and preview creative color palettes.
-
-- Random 5-color palettes
-- Copy HEX codes with one click
-- Theme modes (Pastel, Neon, Earth tone)
-- Preview how colors look in a mini UI
-
-👉 Folder: [`/color-palette`](./color-palette)  
-👉 Demo: _(Deploy on Vercel link here)_
-
----
-
-### 3. Mini E-commerce Showcase
-
-A simple shopping app built with the **Fake Store API**.
-
-- Product listing with category filter & search
-- Add items to cart
-- Cart summary with total price
-- Example of **API fetch + state management** (Zustand/Redux)
-
-👉 Folder: [`/mini-ecommerce`](./mini-ecommerce)  
-👉 Demo: _(Deploy on Vercel link here)_
+- 📝 บันทึกอารมณ์ + โน้ตสั้น ๆ
+- 📅 เลือกวันที่และเวลาได้เอง
+- 😀 Emoji อารมณ์ (มีความสุข, ตื่นเต้น, เฉย ๆ, กังวล, เศร้า, โกรธ)
+- 📊 แสดงผลกราฟเส้น (Line Chart) ของค่าเฉลี่ยอารมณ์รายวัน
+- 🔍 กรองตามช่วงวันที่และประเภทอารมณ์
+- 💾 เก็บข้อมูลใน **LocalStorage** (ใช้งานได้ทันที ไม่ต้องมี backend)
+- ⬇️ Export ข้อมูลเป็นไฟล์ CSV
+- ⬆️ Import ข้อมูลจากไฟล์ CSV
+- 🗑 ลบรายการทีละอัน หรือเคลียร์ทั้งหมดได้
 
 ---
 
 ## 🛠 Tech Stack
 
-- [Next.js](https://nextjs.org/) (App Router)
-- [React](https://react.dev/)
-- [TailwindCSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
-- [Zustand](https://zustand-demo.pmnd.rs/) / Redux (state management)
-- [Recharts](https://recharts.org/) (data visualization)
+- [Next.js](https://nextjs.org/) – React Framework
+- [TypeScript](https://www.typescriptlang.org/) – Static Typing
+- [Tailwind CSS](https://tailwindcss.com/) – Utility-first CSS
+- [shadcn/ui](https://ui.shadcn.com/) – UI Components
+- [Recharts](https://recharts.org/) – Chart Library
+- [Lucide Icons](https://lucide.dev/) – Icon set
 
 ---
 
-## 🚀 Getting Started
-
-Clone and install:
+## 🚀 วิธีติดตั้งและใช้งาน
 
 ```bash
-git clone https://github.com/<your-username>/frontend-portfolio-projects.git
-cd frontend-portfolio-projects
+# 1. โคลน repo (ถ้ายังไม่มี)
+git clone <your-repo-url>
+cd mood-journal
+
+# 2. ติดตั้ง dependencies
 npm install
+
+# 3. รัน development server
 npm run dev
+
+# 4. เปิดใช้งานที่
+http://localhost:3000
 ```
