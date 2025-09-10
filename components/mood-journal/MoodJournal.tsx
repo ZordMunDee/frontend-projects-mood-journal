@@ -11,6 +11,7 @@ import MoodPicker from "./MoodPicker";
 import FiltersBar from "./FiltersBar";
 import TrendChart from "./TrendChart";
 import EntriesList from "./EntriesList";
+import Heatmap from "@/components/mood-journal/Heatmap";
 
 import type { Entry, MoodKey } from "./types";
 import { MOODS } from "./types";
@@ -233,12 +234,13 @@ export default function MoodJournal() {
           </Card>
         </section>
 
-        {/* Filters + Chart + List */}
+        {/* Filters + Chart + Heatmap + List */}
         <section
           className="lg:col-span-2 space-y-6"
-          aria-label="กรอง ดูกราฟ และรายการ"
+          aria-label="กรอง ดูกราฟ ฮีทแมพ และรายการ"
         >
-          <Card className="rounded-2xl shadow-sm min-h-[380px]">
+          {/* Filters + Chart */}
+          <Card className="rounded-2xl shadow-sm">
             <CardContent className="p-4 md:p-6 space-y-4">
               <FiltersBar
                 rangeStart={rangeStart}
@@ -252,6 +254,17 @@ export default function MoodJournal() {
             </CardContent>
           </Card>
 
+          {/* Heatmap (อิงจาก entries ทั้งหมด 30 วันล่าสุด) */}
+          <Card className="rounded-2xl shadow-sm">
+            <CardContent className="p-4 md:p-6">
+              <h2 className="text-lg font-semibold mb-2">
+                Mood Heatmap (30 days)
+              </h2>
+              <Heatmap entries={entries} />
+            </CardContent>
+          </Card>
+
+          {/* Entries List (ตามตัวกรอง) */}
           <Card className="rounded-2xl shadow-sm">
             <CardContent className="p-0">
               <EntriesList entries={filtered} onDelete={deleteEntry} />
