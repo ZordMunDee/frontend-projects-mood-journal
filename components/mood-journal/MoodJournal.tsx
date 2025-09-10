@@ -7,10 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Calendar, Clock, Download, Upload, Trash2 } from "lucide-react";
 
-// import MoodPicker from "./MoodPicker";
-// import FiltersBar from "./FiltersBar";
-// import TrendChart from "./TrendChart";
-// import EntriesList from "./EntriesList";
+import MoodPicker from "./MoodPicker";
+import FiltersBar from "./FiltersBar";
+import TrendChart from "./TrendChart";
+import EntriesList from "./EntriesList";
 
 import type { Entry, MoodKey } from "./types";
 import { MOODS } from "./types";
@@ -142,21 +142,119 @@ export default function MoodJournal() {
           Mood Journal
         </h1>
         <p className="text-muted-foreground mt-1">
-          บันทึกอารมณ์รายวัน + กราฟสรุป • ยืดหยุ่นและใช้งานง่าย{" "}
+          บันทึกอารมณ์รายวัน + กราฟสรุป • ยืดหยุ่นและใช้งานง่าย
         </p>
       </header>
 
-      <div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Form */}
-        <section>
-          <Card>
-            <CardContent>
-              {/* Data and Time */}
-              <div>
+        <section aria-label="แบบฟอร์มบันทึกอารมณ์">
+          <Card className="rounded-2xl shadow-sm">
+            <CardContent className="p-4 md:p-6 space-y-4">
+              {/* Date & Time */}
+              <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label>{/* <Calender></Calender> วันที่ */}</label>
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Calendar className="h-4 w-4" /> วันที่
+                  </label>
+                  <Input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium flex items-center gap-2">
+                    <Clock className="h-4 w-4" /> เวลา
+                  </label>
+                  <Input
+                    type="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                  />
                 </div>
               </div>
+
+              {/* Mood */}
+              <MoodPicker mood={mood} onChange={setMood} />
+
+              {/* Note */}
+              <div>
+                <label className="text-sm font-medium mb-2 block">
+                  โน้ตสั้น ๆ
+                </label>
+                <Textarea
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="วันนี้รู้สึกยังไง..."
+                  rows={4}
+                />
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-wrap gap-2">
+                <Button onClick={addEntry} disabled={!note.trim()}>
+                  บันทึก
+                </Button>
+
+                <Button
+                  variant="secondary"
+                  onClick={exportCSV}
+                  className="gap-2"
+                >
+                  <Download className="h-4 w-4" /> Export
+                </Button>
+
+                <label className="inline-flex items-center gap-2 cursor-pointer rounded-md border px-3 py-2 text-sm">
+                  <Upload className="h-4 w-4" />
+                  <span>Import CSV</span>
+                  <input
+                    type="file"
+                    accept=".csv"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (f) importCSV(f);
+                    }}
+                  />
+                </label>
+
+                <div className="ms-auto">
+                  <Button
+                    variant="destructive"
+                    onClick={clearAll}
+                    className="gap-2"
+                  >
+                    <Trash2 className="h-4 w-4" /> ล้างทั้งหมด
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Filters + Chart + List */}
+        <section
+          className="lg:col-span-2 space-y-6"
+          aria-label="กรอง ดูกราฟ และรายการ"
+        >
+          <Card className="rounded-2xl shadow-sm min-h-[380px]">
+            <CardContent className="p-4 md:p-6 space-y-4">
+              <FiltersBar
+                rangeStart={rangeStart}
+                rangeEnd={rangeEnd}
+                filterMood={filterMood}
+                onChangeStart={setRangeStart}
+                onChangeEnd={setRangeEnd}
+                onChangeMood={setFilterMood}
+              />
+              <TrendChart data={chartData} />
+            </CardContent>
+          </Card>
+
+          <Card className="rounded-2xl shadow-sm">
+            <CardContent className="p-0">
+              <EntriesList entries={filtered} onDelete={deleteEntry} />
             </CardContent>
           </Card>
         </section>
