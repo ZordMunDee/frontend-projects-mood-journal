@@ -272,7 +272,7 @@ export default function MoodJournal() {
             </CardContent>
           </Card>
 
-          {/* Heatmap (อิงจาก entries ทั้งหมด 30 วันล่าสุด) */}
+          {/* Heatmap */}
           <Card className="rounded-2xl shadow-sm">
             <CardContent className="p-4 md:p-6">
               <h2 className="text-lg font-semibold mb-2">
@@ -282,7 +282,7 @@ export default function MoodJournal() {
             </CardContent>
           </Card>
 
-          {/* Entries List (ตามตัวกรอง) */}
+          {/* Entries List */}
           <Card className="rounded-2xl shadow-sm">
             <CardContent className="p-0">
               <EntriesList entries={filtered} onDelete={deleteEntry} />

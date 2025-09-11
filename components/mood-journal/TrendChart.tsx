@@ -37,7 +37,6 @@ export default function TrendChart({ data }: TrendChartProps) {
             tickLine={false}
           />
 
-          {/* ✅ พิมพ์ type ให้ formatter ชัดเจน แทนการใช้ any */}
           <Tooltip
             formatter={(value: unknown) =>
               value == null ? "ไม่มีข้อมูล" : (value as number)
